@@ -1,4 +1,7 @@
 # Open WebUI 👋
+## Important Note:
+* **Look ar readme.pdf to check changes made by Sankhodeep.**
+
 
 ![GitHub stars](https://img.shields.io/github/stars/open-webui/open-webui?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/open-webui/open-webui?style=social)

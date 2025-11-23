@@ -548,6 +548,22 @@ async def get_all_models(request: Request, user: UserModel) -> dict[str, list]:
     models = get_merged_models(map(extract_data, responses))
     log.debug(f"models: {models}")
 
+    # === START OF MY FIX ===
+    # এখানে আমরা ম্যানুয়ালি FriendliAI মডেলটা অ্যাড করছি
+    # এটা চেক করবে যে এই মডেলটা অলরেডি লিস্টে আছে কিনা, না থাকলে অ্যাড করবে
+    medgemma_id = "dep5dk2j3meguw3"
+    if medgemma_id not in models:
+        models[medgemma_id] = {
+            "id": medgemma_id,
+            "name": "MedGemma 27B (FriendliAI)",
+            "object": "model",
+            "created": 1234567890,
+            "owned_by": "friendli-ai",
+            "urlIdx": 0,  # IMPORTANT: This assumes FriendliAI is your 1st URL in settings.
+            # If it's the 2nd URL, change this to 1.
+        }
+    # === END OF MY FIX ===
+
     request.app.state.OPENAI_MODELS = models
     return {"data": list(models.values())}
 
